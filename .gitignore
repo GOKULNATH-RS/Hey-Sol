@@ -39,3 +39,5 @@ yarn-error.log*
 
 # Virtual Environment
 venv
+.venv
+__pycache__
