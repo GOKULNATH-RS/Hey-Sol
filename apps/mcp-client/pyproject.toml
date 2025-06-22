@@ -1,0 +1,13 @@
+[project]
+name = "mcp-client-py"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "fastapi[standard]>=0.115.13",
+    "fastmcp>=2.8.1",
+    "google-genai>=1.21.1",
+    "uvicorn>=0.34.3",
+]

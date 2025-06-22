@@ -1,1 +1,0 @@
-# API Server to handle Gemini and MCP client
