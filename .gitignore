@@ -41,3 +41,10 @@ yarn-error.log*
 venv
 .venv
 __pycache__
+
+
+# IDE
+.idea
+.vscode
+*.sublime-workspace
+*.sublime-project

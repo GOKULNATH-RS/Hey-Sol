@@ -4,7 +4,7 @@ import asyncio, os
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
-from google.genai.types import Tool, FunctionDeclaration
+from google.genai.types import Tool, FunctionDeclaration, ToolConfig
 
 from typing import Optional
 from mcp import ClientSession , StdioServerParameters
@@ -41,7 +41,7 @@ class MCPClient:
         self.genai_client = genai.Client(api_key=gemini_api_key)
 
     async def connect_to_server(self, server_script_path: str):
-        command = "python"
+        command = "node"
         server_params = StdioServerParameters(
             command=command, args=[server_script_path], env=None
         )
@@ -73,6 +73,12 @@ class MCPClient:
             contents=[user_prompt_content],
             config=types.GenerateContentConfig(
                 tools=self.function_declarations,
+                automatic_function_calling=types.AutomaticFunctionCallingConfig(
+                    disable=True
+                ),
+                tool_config=ToolConfig(
+                    function_calling_config=types.FunctionCallingConfig(mode='AUTO')
+                ),
             ),
         )
 
@@ -136,16 +142,21 @@ class MCPClient:
 
 def convert_mcp_tools_to_gemini(mcp_tools):
     gemini_tools = []
-    for tool in mcp_tools:
-        parameters = clean_schema(tool.inputSchema)
-        function_declaration = FunctionDeclaration(
-            name=tool.name,
-            description=tool.description,
-            parameters=parameters,
-        )
-        gemini_tool = Tool(function_declarations=[function_declaration])
-        gemini_tools.append(gemini_tool)
-    return gemini_tools
+    try:
+        print("Converting MCP tools to Gemini format... ")
+        print(mcp_tools)
+        for tool in mcp_tools:
+            parameters = clean_schema(tool.inputSchema)
+            function_declaration = FunctionDeclaration(
+                name=tool.name,
+                description=tool.description,
+                parameters=parameters,
+            )
+            gemini_tool = Tool(function_declarations=[function_declaration])
+            gemini_tools.append(gemini_tool)
+        return gemini_tools
+    except Exception as e:
+        print(f"Error converting MCP tools to Gemini format: {e}")
 
 
 def clean_schema(schema):
@@ -160,10 +171,11 @@ def clean_schema(schema):
 mcp_client = MCPClient()
 
 
+# change to lifespan events 
 @app.on_event("startup")
 async def startup_event():
     print("Starting MCP client...")
-    await mcp_client.connect_to_server("../mcp-python/main.py")  # Path to your MCP tool server
+    await mcp_client.connect_to_server("../mcp-typescript/dist/index.js")  # Path to your MCP tool server
     print("MCP client initialized")
 
 @app.get("/")
@@ -196,3 +208,9 @@ async def websocket_endpoint(websocket: WebSocket):
     except Exception as e:
         print("WebSocket error:", e)
         await websocket.close()
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="localhost", port=8002, log_level="info")
+    print("Server started at http://localhost:8002")

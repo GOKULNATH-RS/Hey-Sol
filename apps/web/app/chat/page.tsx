@@ -52,7 +52,7 @@ export default function Chat() {
         
         // Connect to WebSocket for streaming responses
         try {
-            const ws = new WebSocket("ws://localhost:8000/chat");
+            const ws = new WebSocket("ws://localhost:8002/chat");
             let accumulatedText = "";
             
             ws.onopen = () => {
@@ -120,9 +120,9 @@ export default function Chat() {
     };
 
     return (
-        <div className="flex flex-col h-screen bg-gray-50 dark:bg-gray-900">
+        <div className="flex flex-col h-screen bg-gray-50 dark:bg-gray-900 px-36">
             <div className="flex items-center justify-between p-4 border-b bg-white dark:bg-gray-800 dark:border-gray-700">
-                <h1 className="text-xl font-bold text-gray-800 dark:text-white">Chat Assistant</h1>
+                <h1 className="text-xl font-bold text-gray-800 dark:text-white">Hey SOL</h1>
             </div>
             
             <div className="flex-1 overflow-y-auto p-4 space-y-4">
