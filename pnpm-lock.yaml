@@ -43,7 +43,49 @@ importers:
         specifier: ^5.8.3
         version: 5.8.3
 
+  apps/mcp-client: {}
+
   apps/mcp-client-py: {}
+
+  apps/mcp-server:
+    dependencies:
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.13.0
+        version: 1.13.0
+      '@solana-agent-kit/adapter-mcp':
+        specifier: ^2.0.6
+        version: 2.0.6(solana-agent-kit@2.0.8(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(openai@5.6.0(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10))(zod@3.25.67))(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10)))
+      '@solana-agent-kit/plugin-nft':
+        specifier: ^2.0.6
+        version: 2.0.6(@noble/hashes@1.8.0)(@solana/web3.js@1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10))(@types/node@20.19.1)(arweave@1.15.7)(axios@1.10.0)(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(got@11.8.6)(solana-agent-kit@2.0.8(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(openai@5.6.0(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10))(zod@3.25.67))(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(typescript@5.8.3)(utf-8-validate@5.0.10)
+      '@solana-agent-kit/plugin-token':
+        specifier: ^2.0.7
+        version: 2.0.7(@noble/hashes@1.8.0)(@solana/web3.js@1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10))(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(solana-agent-kit@2.0.8(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(openai@5.6.0(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10))(zod@3.25.67))(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10)))(typescript@5.8.3)(utf-8-validate@5.0.10)
+      '@solana/web3.js':
+        specifier: ^1.98.2
+        version: 1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
+      bs58:
+        specifier: ^6.0.0
+        version: 6.0.0
+      cors:
+        specifier: ^2.8.5
+        version: 2.8.5
+      dotenv:
+        specifier: ^16.5.0
+        version: 16.5.0
+      express:
+        specifier: ^5.1.0
+        version: 5.1.0
+      solana-agent-kit:
+        specifier: ^2.0.8
+        version: 2.0.8(bufferutil@4.0.9)(fastestsmallesttextencoderdecoder@1.0.22)(openai@5.6.0(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10))(zod@3.25.67))(react@19.1.0)(typescript@5.8.3)(utf-8-validate@5.0.10)(ws@7.5.10(bufferutil@4.0.9)(utf-8-validate@5.0.10))
+      zod:
+        specifier: ^3.25.67
+        version: 3.25.67
+    devDependencies:
+      '@types/node':
+        specifier: ^20
+        version: 20.19.1
 
   apps/mcp-typescript:
     dependencies:
@@ -90,6 +132,9 @@ importers:
       '@hey-sol/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      lucide:
+        specifier: ^0.525.0
+        version: 0.525.0
       lucide-react:
         specifier: ^0.516.0
         version: 0.516.0(react@19.1.0)
@@ -2359,6 +2404,9 @@ packages:
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
+  lucide@0.525.0:
+    resolution: {integrity: sha512-sfehWlaE/7NVkcEQ4T9JD3eID8RNMIGJBBUq9wF3UFiJIrcMKRbU3g1KGfDk4svcW7yw8BtDLXaXo02scDtUYQ==}
+
   magic-string@0.30.17:
     resolution: {integrity: sha512-sNPKHvyjVf7gyjwS4xGTaW/mCnF8wnjtifKBEhxfZ7E/S8tQ0rssrwGNn6q8JH/ohItJfSQp9mBtQYuTlH5QnA==}
 
@@ -4053,7 +4101,7 @@ snapshots:
 
   '@metaplex-foundation/beet-solana@0.3.1(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)':
     dependencies:
-      '@metaplex-foundation/beet': 0.6.1
+      '@metaplex-foundation/beet': 0.7.2
       '@solana/web3.js': 1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       bs58: 5.0.0
       debug: 4.4.1
@@ -4066,7 +4114,7 @@ snapshots:
 
   '@metaplex-foundation/beet-solana@0.4.0(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)':
     dependencies:
-      '@metaplex-foundation/beet': 0.7.1
+      '@metaplex-foundation/beet': 0.7.2
       '@solana/web3.js': 1.98.2(bufferutil@4.0.9)(typescript@5.8.3)(utf-8-validate@5.0.10)
       bs58: 5.0.0
       debug: 4.4.1
@@ -5704,7 +5752,7 @@ snapshots:
     dependencies:
       cipher-base: 1.0.6
       inherits: 2.0.4
-      ripemd160: 2.0.1
+      ripemd160: 2.0.2
       sha.js: 2.4.11
 
   create-hash@1.2.0:
@@ -6439,6 +6487,8 @@ snapshots:
   lucide-react@0.516.0(react@19.1.0):
     dependencies:
       react: 19.1.0
+
+  lucide@0.525.0: {}
 
   magic-string@0.30.17:
     dependencies:

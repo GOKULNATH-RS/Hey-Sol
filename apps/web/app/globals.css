@@ -1,26 +1,49 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f3f3f3;
+  --foreground: #000508;
+  --sol-purple: #9945ff;
+  --sol-green: #14f195;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-darker-grotesque: var(--font-darker-grotesque);
+  --font-poppins: var(--font-poppins);
+
+  --color-black: "#000508";
+  --color-white: "#f3f3f3";
+
+  --color-sol-purple: var(--sol-purple);
+  --color-sol-green: var(--sol-green);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000508;
+    --foreground: #f3f3f3;
+  }
+}
+
+@layer utilities {
+  .sol-gradient {
+    background: linear-gradient(90deg, var(--sol-purple), var(--sol-green));
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Poppins', sans-serif;
+}
+
+.grains {
+   background-image:url(/_next/static/media/grains.1ccdda41.png);
+  background-size:100px 100px;
+  background-repeat:repeat;
+  background-blend-mode:overlay;
+  background-position:left top;
+  mix-blend-mode:overlay;
 }

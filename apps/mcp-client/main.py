@@ -37,7 +37,7 @@ class MCPClient:
     async def connect_to_server(self):
         """Connect to the MCP server and initialize the session."""
 
-        node_server_script="../mcp-typescript/dist/index.js"
+        node_server_script="../mcp-server/dist/index.js"
 
         transport = NodeStdioTransport(
             script_path=node_server_script,
@@ -61,7 +61,7 @@ class MCPClient:
         self.mcp_tools = tools
 
 
-    async def stream_query(self, query: str):
+    async def stream_query(self, query: str, websocket: Optional[WebSocket] = None):
         if not self.session:
             raise ValueError("MCP client session is not initialized")
         
@@ -91,6 +91,13 @@ class MCPClient:
                         tool_call_part = part
                         tool_name = part.function_call.name
                         tool_args = part.function_call.args
+                        if websocket:
+                            await websocket.send_json({
+                                "type": "function_call",
+                                "name": tool_name,
+                                "args": tool_args
+                            })
+                        
                         print(f"[Function Call Detected Tool]: {tool_name}, Args: {tool_args}")
                         break 
                     elif part.text:
@@ -209,7 +216,7 @@ async def websocket_endpoint(websocket: WebSocket):
             print(f"Received query: {user_message}")
 
             try:
-                async for chunk in mcp_client_class.stream_query(user_message):
+                async for chunk in mcp_client_class.stream_query(user_message,websocket):
                     await websocket.send_json({"type": "stream", "text": chunk})
                 await websocket.send_json({"type": "done"})
 
