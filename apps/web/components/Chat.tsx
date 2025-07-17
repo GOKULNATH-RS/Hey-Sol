@@ -1,13 +1,11 @@
 import React from 'react'
 import ChatInterface from './ChatInterface'
+import HeySol from './HeySol'
 
 const Chat = () => {
   return (
-    <div className='flex flex-col items-center justify-center gap-4 text-center'>
-        <div>
-            <p className='text-5xl font-darker-grotesque font-medium text-foreground/90 mb-4'>Welcome! Ready to explore?</p>
-        </div>
-        <div>
+    <div className='flex h-full flex-col items-center justify-center gap-4 text-center'>
+        <div className='h-full'>
             <ChatInterface />
         </div>
     </div>

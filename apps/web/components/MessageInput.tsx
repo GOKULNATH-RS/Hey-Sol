@@ -5,9 +5,10 @@ import React from 'react'
 type MessageInputProps = {
     value: string;
     setValue: (value: string) => void;
+    onEnter?: () => void; 
 }
 
-const MessageInput: React.FC<MessageInputProps> = ({ value, setValue }: MessageInputProps) => {
+const MessageInput: React.FC<MessageInputProps> = ({ value, setValue, onEnter }: MessageInputProps) => {
   return (
     <div className='rounded-[20px] flex items-center justify-center'>
         <textarea 
@@ -19,6 +20,12 @@ const MessageInput: React.FC<MessageInputProps> = ({ value, setValue }: MessageI
                 e.target.style.height = 'auto';
                 const newHeight = Math.min(e.target.scrollHeight, 200); // Max height of 200px
                 e.target.style.height = `${newHeight}px`;
+            }}
+            onKeyDown={e => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    if (onEnter) onEnter();
+                  }
             }}
             rows={1}
             className='bg-background lg:w-[850px] p-4 px-6 rounded-[20px] active:border-none focus:outline-none 
